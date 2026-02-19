@@ -1,0 +1,182 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\AlbumRepository;
+use ApiPlatform\Metadata\ApiResource;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: AlbumRepository::class)]
+#[ApiResource]
+class Album
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nomAlbum = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column]
+    private ?int $nombreDeTitres = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $dateDeSortie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lienSpotify = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienDeezer = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienYoutubeMusic = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienAppleMusic = null;
+
+    #[ORM\Column]
+    private ?bool $isSingle = null;
+
+    #[ORM\ManyToOne(inversedBy: 'albums')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Compositeur $compositeur = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['album:read', 'album:create'])]
+    private ?string $cover = '';
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNomAlbum(): ?string
+    {
+        return $this->nomAlbum;
+    }
+
+    public function setNomAlbum(string $nomAlbum): static
+    {
+        $this->nomAlbum = $nomAlbum;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getNombreDeTitres(): ?int
+    {
+        return $this->nombreDeTitres;
+    }
+
+    public function setNombreDeTitres(int $nombreDeTitres): static
+    {
+        $this->nombreDeTitres = $nombreDeTitres;
+
+        return $this;
+    }
+
+    public function getDateDeSortie(): ?\DateTime
+    {
+        return $this->dateDeSortie;
+    }
+
+    public function setDateDeSortie(\DateTime $dateDeSortie): static
+    {
+        $this->dateDeSortie = $dateDeSortie;
+
+        return $this;
+    }
+
+    public function getLienSpotify(): ?string
+    {
+        return $this->lienSpotify;
+    }
+
+    public function setLienSpotify(string $lienSpotify): static
+    {
+        $this->lienSpotify = $lienSpotify;
+
+        return $this;
+    }
+
+    public function getLienDeezer(): ?string
+    {
+        return $this->lienDeezer;
+    }
+
+    public function setLienDeezer(?string $lienDeezer): static
+    {
+        $this->lienDeezer = $lienDeezer;
+
+        return $this;
+    }
+
+    public function getLienYoutubeMusic(): ?string
+    {
+        return $this->lienYoutubeMusic;
+    }
+
+    public function setLienYoutubeMusic(?string $lienYoutubeMusic): static
+    {
+        $this->lienYoutubeMusic = $lienYoutubeMusic;
+
+        return $this;
+    }
+
+    public function getLienAppleMusic(): ?string
+    {
+        return $this->lienAppleMusic;
+    }
+
+    public function setLienAppleMusic(?string $lienAppleMusic): static
+    {
+        $this->lienAppleMusic = $lienAppleMusic;
+
+        return $this;
+    }
+
+    public function isSingle(): ?bool
+    {
+        return $this->isSingle;
+    }
+
+    public function setIsSingle(bool $isSingle): static
+    {
+        $this->isSingle = $isSingle;
+
+        return $this;
+    }
+
+    public function getCompositeur(): ?Compositeur
+    {
+        return $this->compositeur;
+    }
+
+    public function setCompositeur(?Compositeur $compositeur): static
+    {
+        $this->compositeur = $compositeur;
+
+        return $this;
+    }
+
+    public function getCover(): ?string { return $this->cover; }
+    public function setCover(?string $cover): static { $this->cover = $cover; return $this; }
+
+}
