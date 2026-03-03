@@ -16,6 +16,9 @@ export default function TableauCompositeurs({ compositeurs }) {
             throw new Error("Annulé");
         },
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['compositeurs'] }),
+        onError: (error) => {
+            alert("Erreur : " + (error.response?.data?.message || "Erreur lors de la supression, des albums contiennent peut-être ce compositeur"));
+        }
     });
 
     const mutationModification = useMutation({

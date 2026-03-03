@@ -2,8 +2,10 @@ import FormulaireConnexion from "../formulaire/formulaireConnexion.jsx";
 import {useState} from "react";
 import axios from "axios";
 import {useMutation} from "@tanstack/react-query";
+import {useNavigate} from "react-router-dom";
 
 export default function PageConnexion() {
+    const navigate = useNavigate();
 
     const [infosConnexion, setInfosConnexion] = useState({
         username : '',
@@ -30,6 +32,7 @@ export default function PageConnexion() {
         onSuccess: (data) => {
             localStorage.setItem('token', data.token);
             alert("Connecté !");
+            navigate('/admin/dashboard/discographie');
         },
         onError: (error) => {
             alert("Erreur : " + (error.response?.data?.message || "Identifiants invalides"));

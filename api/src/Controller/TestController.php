@@ -13,7 +13,7 @@ final class TestController extends AbstractController
     public function index(): JsonResponse
     {
         return $this->json([
-            'message' => 'Bravo ! Ton React communique bien avec Symfony Docker 🐳',
+            'message' => 'React communique bien avec Symfony Docker ',
             'status' => 'success'
         ]);
     }

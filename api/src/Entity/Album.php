@@ -6,49 +6,67 @@ use App\Repository\AlbumRepository;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedName;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['album:read']],
+    denormalizationContext: ['groups' => ['album:write']]
+)]
+
 class Album
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['album:read','album:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $nomAlbum = null;
 
     #[ORM\Column(length: 500, nullable: true)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['album:read', 'album:write'])]
     private ?int $nombreDeTitres = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['album:read', 'album:write'])]
     private ?\DateTime $dateDeSortie = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $lienSpotify = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $lienDeezer = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $lienYoutubeMusic = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $lienAppleMusic = null;
 
     #[ORM\Column]
+    #[Groups(['album:read', 'album:write'])]
+    #[SerializedName('isSingle')]
     private ?bool $isSingle = null;
 
     #[ORM\ManyToOne(inversedBy: 'albums')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['album:read', 'album:write'])]
     private ?Compositeur $compositeur = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['album:read', 'album:create'])]
+    #[Groups(['album:read', 'album:write'])]
     private ?string $cover = '';
 
     public function getId(): ?int
@@ -152,7 +170,7 @@ class Album
         return $this;
     }
 
-    public function isSingle(): ?bool
+    public function getIsSingle(): ?bool
     {
         return $this->isSingle;
     }
