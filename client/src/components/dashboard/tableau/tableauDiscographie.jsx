@@ -1,10 +1,8 @@
 import {useNavigate} from "react-router-dom";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {deleteCompositeur} from "../../../services/compositeurService.js";
 import {deleteAlbum} from "../../../services/albumService.js";
 
 export default function TableauDiscographie ({albums,isPending}){
-
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -19,38 +17,40 @@ export default function TableauDiscographie ({albums,isPending}){
     });
 
     return (
-        <div className="mt-8 w-fit max-w-2xl">
-            <h2 className="text-xl font-bold mb-4">Liste des albums</h2>
-            <table className="w-full border-collapse border border-gray-300 bg-white">
-                <thead className="bg-gray-100">
-                <tr>
-                    <th className="border border-gray-300 p-2 text-left">ID</th>
-                    <th className="border border-gray-300 p-2 text-left">Nom de l'album</th>
-                    <th className="border border-gray-300 p-2 text-left">Type</th>
-                    <th className="border border-gray-300 p-2 text-center">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {albums?.length > 0 ? (albums.map((album) => (
-                        <tr key={album.id} className="hover:bg-gray-50">
-                            <td className="border border-gray-300 p-2">{album.id}</td>
-                            <td className="border border-gray-300 p-2">{album.nomAlbum}</td>
-                            <td className="border border-gray-300 p-2">{album.isSingle ? "Single" : "Album"}</td>
-                            <td className="border border-gray-300 p-2 flex justify-center gap-2">
-                                <button type="button" onClick={()=>navigate('/admin/dashboard/discographie/' + album.id)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm cursor-pointer">Modifier</button>
-                                <button type="button" onClick={() => mutationSuppression.mutate(album.id)} disabled={mutationSuppression.isPending} className="bg-red-500 text-white px-3 py-1 rounded text-sm cursor-pointer">Supprimer</button>
+        <div className="w-full max-w-4xl pb-12">
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-semibold text-black tracking-tight">Discographie</h2>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <table className="w-full text-sm text-left">
+                    <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 font-medium">
+                    <tr>
+                        <th className="px-6 py-4">Nom de l'album</th>
+                        <th className="px-6 py-4">Type</th>
+                        <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                    {albums?.length > 0 ? (albums.map((album) => (
+                            <tr key={album.id} className="hover:bg-gray-50 transition-colors">
+                                <td className="px-6 py-4 font-medium text-black">{album.nomAlbum}</td>
+                                <td className="px-6 py-4 text-gray-600">{album.isSingle ? "Single" : "Album"}</td>
+                                <td className="px-6 py-4 flex flex-col md:flex-row justify-end gap-3">
+                                    <button type="button" onClick={()=>navigate('/admin/dashboard/discographie/' + album.id)} className="text-gray-600 hover:text-black text-sm font-medium cursor-pointer transition-colors">Modifier</button>
+                                    <button type="button" onClick={() => mutationSuppression.mutate(album.id)} disabled={mutationSuppression.isPending} className="text-red-500 hover:text-red-700 text-sm font-medium cursor-pointer transition-colors disabled:opacity-50">Supprimer</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
+                                Aucun album trouvé.
                             </td>
                         </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan="3" className="border border-gray-300 p-4 text-center text-gray-500">
-                            Aucun album trouvé.
-                        </td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
+                    )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

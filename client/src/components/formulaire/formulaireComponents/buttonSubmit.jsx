@@ -1,5 +1,5 @@
 export default function ButtonSubmit({text,onSubmit,isPending}) {
     return(
-        <button disabled={isPending} onSubmit={onSubmit} className={"bg-black text-white rounded-lg p-[7px] w-fit cursor-pointer"} type={"submit"}>{isPending ? "Connexion..." : text}</button>
+        <button disabled={isPending} onSubmit={onSubmit} className="bg-black text-white text-sm font-medium rounded-md px-5 py-2.5 w-fit cursor-pointer hover:bg-gray-800 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed shadow-sm" type={"submit"}>{isPending ? "Traitement..." : text}</button>
     )
 }

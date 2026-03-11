@@ -197,4 +197,19 @@ class Album
     public function getCover(): ?string { return $this->cover; }
     public function setCover(?string $cover): static { $this->cover = $cover; return $this; }
 
+    #[Groups(['album:read'])]
+    public function getLinkForIframe(): ?string {
+        if (!$this->lienSpotify) {
+            return null;
+        }
+
+        $link = '';
+        // On extrait directement "album/ID" ou "track/ID"
+        if (preg_match('/(album|track)\/[a-zA-Z0-9]+/', $this->lienSpotify, $matches)) {
+            $typeEtId = $matches[0]; // ex: "album/1A2B3C4D5E"
+            $link = "https://open.spotify.com/embed/{$typeEtId}?utm_source=generator&theme=0";
+        }
+        return $link;
+    }
+
 }

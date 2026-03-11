@@ -31,7 +31,6 @@ export default function PageConnexion() {
         },
         onSuccess: (data) => {
             localStorage.setItem('token', data.token);
-            alert("Connecté !");
             navigate('/admin/dashboard/discographie');
         },
         onError: (error) => {
@@ -45,7 +44,7 @@ export default function PageConnexion() {
     }
 
     return (
-        <div className={"flex items-center justify-center h-dvh w-full bg-[#f2f2f2]"}>
+        <div className="flex items-center justify-center min-h-screen w-full bg-gray-50">
             <FormulaireConnexion isPending={isPending} onSubmit={handleSubmit} value={infosConnexion} onChange={handleChange}></FormulaireConnexion>
         </div>
     )

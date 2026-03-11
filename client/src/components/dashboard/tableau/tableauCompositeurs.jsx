@@ -5,8 +5,8 @@ import { deleteCompositeur, modifyCompositeur } from "../../../services/composit
 export default function TableauCompositeurs({ compositeurs }) {
     const queryClient = useQueryClient();
 
-    const [editingId, setEditingId] = useState(null); // L'ID de la ligne en cours de modif
-    const [editName, setEditName] = useState("");     // Le texte tapé dans l'input
+    const [editingId, setEditingId] = useState(null);
+    const [editName, setEditName] = useState("");
 
     const mutationSuppression = useMutation({
         mutationFn: async (id) => {
@@ -26,72 +26,68 @@ export default function TableauCompositeurs({ compositeurs }) {
             return await modifyCompositeur(editingId, { nom: editName });
         },
         onSuccess: () => {
-            // On quitte le mode édition et on rafraîchit
             setEditingId(null);
             queryClient.invalidateQueries({ queryKey: ['compositeurs'] });
         },
         onError: () => alert("Erreur lors de la modification.")
     });
 
-    // --- HANDLERS POUR LES BOUTONS ---
     const handleEditClick = (comp) => {
-        setEditingId(comp.id); // On active le mode édition sur cette ligne
-        setEditName(comp.nom); // On pré-remplit l'input avec le nom actuel
+        setEditingId(comp.id);
+        setEditName(comp.nom);
     };
 
     const handleCancelClick = () => {
-        setEditingId(null); // On annule en remettant l'ID à null
+        setEditingId(null);
     };
 
     return (
-        <div className="mt-8 w-full max-w-2xl">
-            <h2 className="text-xl font-bold mb-4">Liste des compositeurs</h2>
-            <table className="w-full border-collapse border border-gray-300 bg-white">
-                <thead className="bg-gray-100">
-                <tr>
-                    <th className="border border-gray-300 p-2 text-left">ID</th>
-                    <th className="border border-gray-300 p-2 text-left">Compositeur</th>
-                    <th className="border border-gray-300 p-2 text-center">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {compositeurs?.length > 0 ? (compositeurs.map((comp) => (
-                        <tr key={comp.id} className="hover:bg-gray-50">
-                            <td className="border border-gray-300 p-2">{comp.id}</td>
+        <div className="w-full max-w-4xl">
+            <div className="bg-white border border-gray-200 rounded-b-lg overflow-hidden shadow-sm">
+                <table className="w-full text-sm text-left">
+                    <thead className="bg-gray-50 border-b border-gray-200 text-gray-600 font-medium">
+                    <tr>
+                        <th className="px-6 py-4">Compositeur</th>
+                        <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                    {compositeurs?.length > 0 ? (compositeurs.map((comp) => (
+                            <tr key={comp.id} className="hover:bg-gray-50 transition-colors">
 
-                            {/* COLONNE DU NOM : Input ou Texte selon le mode */}
-                            <td className="border border-gray-300 p-2">
-                                {editingId === comp.id ? (
-                                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="border border-blue-500 p-1 rounded w-full" autoFocus/>
-                                ) : (comp.nom)}
-                            </td>
+                                <td className="px-6 py-4">
+                                    {editingId === comp.id ? (
+                                        <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} className="border border-gray-300 px-3 py-1.5 rounded-md focus:outline-none focus:border-black w-full text-sm" autoFocus/>
+                                    ) : (
+                                        <span className="font-medium text-black">{comp.nom}</span>
+                                    )}
+                                </td>
 
-                            {/* COLONNE ACTIONS : Boutons diffèrent selon le mode */}
-                            <td className="border border-gray-300 p-2 flex justify-center gap-2">
-                                {editingId === comp.id ? (
-                                    <>
-                                        {/* BOUTONS MODE SAUVEGARDE */}
-                                        <button onClick={() => mutationModification.mutate()} disabled={mutationModification.isPending} className="bg-green-500 text-white px-3 py-1 rounded text-sm disabled:bg-green-300 cursor-pointer">{mutationModification.isPending ? '...' : 'Valider'}</button>
-                                        <button onClick={handleCancelClick} className="bg-gray-500 text-white px-3 py-1 rounded text-sm cursor-pointer">Annuler</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        {/* BOUTONS MODE NORMAL */}
-                                        <button onClick={() => handleEditClick(comp)} className="bg-blue-500 text-white px-3 py-1 rounded text-sm cursor-pointer">Modifier</button>
-                                        <button onClick={() => mutationSuppression.mutate(comp.id)} disabled={mutationSuppression.isPending} className="bg-red-500 text-white px-3 py-1 rounded text-sm disabled:bg-red-300 cursor-pointer">Supprimer</button></>
-                                )}
+                                <td className="px-6 py-4 flex flex-col md:flex-row justify-end gap-4">
+                                    {editingId === comp.id ? (
+                                        <>
+                                            <button onClick={() => mutationModification.mutate()} disabled={mutationModification.isPending} className="text-black font-medium hover:text-gray-600 text-sm cursor-pointer disabled:opacity-50">{mutationModification.isPending ? '...' : 'Valider'}</button>
+                                            <button onClick={handleCancelClick} className="text-gray-500 hover:text-black font-medium text-sm cursor-pointer">Annuler</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <button onClick={() => handleEditClick(comp)} className="text-gray-600 hover:text-black font-medium text-sm cursor-pointer transition-colors">Modifier</button>
+                                            <button onClick={() => mutationSuppression.mutate(comp.id)} disabled={mutationSuppression.isPending} className="text-red-500 hover:text-red-700 font-medium text-sm cursor-pointer transition-colors disabled:opacity-50">Supprimer</button>
+                                        </>
+                                    )}
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3" className="px-6 py-8 text-center text-gray-500">
+                                Aucun compositeur trouvé.
                             </td>
                         </tr>
-                    ))
-                ) : (
-                    <tr>
-                        <td colSpan="3" className="border border-gray-300 p-4 text-center text-gray-500">
-                            Aucun compositeur trouvé.
-                        </td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
+                    )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
