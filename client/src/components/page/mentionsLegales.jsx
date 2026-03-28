@@ -1,3 +1,5 @@
+import {useEffect} from "react";
+
 export default function MentionsLegales() {
     useEffect(() => {
         document.title = "AcroMusic | Mentions légales";
