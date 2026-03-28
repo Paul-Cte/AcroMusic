@@ -6,7 +6,7 @@ export default function MentionsLegales() {
     }, []);
     return (
         <div className="pt-25 md:pt-[25vh] pb-20 flex flex-col items-center min-h-screen">
-            <div className="w-[90%] max-w-4xl bg-white p-8 md:p-12 rounded-lg">
+            <div className="w-[90%] max-w-4xl bg-white pt-0 p-8 md:pt-0 md:p-12 rounded-lg">
                 <h1 className="text-4xl md:text-6xl font-black text-black uppercase tracking-tighter mb-10">
                     Mentions Légales
                 </h1>
