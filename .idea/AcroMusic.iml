@@ -151,6 +151,8 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/lexik/jwt-authentication-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/jms/metadata" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/vich/uploader-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/symfony/rate-limiter" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/symfony/lock" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

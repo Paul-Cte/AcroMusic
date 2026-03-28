@@ -22,6 +22,10 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
+            login_throttling:
+                max_attempts: 3 # Bloque après 3 essais ratés
+                interval: '1 minute'
+
         # 2. Protège le reste de l'API
         api:
             pattern: ^/api

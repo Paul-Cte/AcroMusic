@@ -7,6 +7,7 @@ import PageClient from "./components/page/pageClient.jsx";
 import { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import ScrollToTop from "./components/page/scrollToTop.jsx";
 
 
 function App() {
@@ -14,13 +15,14 @@ function App() {
     useEffect(() => {
         AOS.init({
             duration: 800,
-            once: true,
+            once: false,
             offset: 100,
         });
     }, []);
 
     return (
         <BrowserRouter>
+            <ScrollToTop/>
             <Routes>
                 <Route path="/admin" element={<PageConnexion/>}/>
                 <Route path="/admin/dashboard/*" element={<PageAdmin/>}/>

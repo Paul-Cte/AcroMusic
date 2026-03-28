@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+node_modules/
+
+dist/
+dist-ssr/
+build/
+
+.env
+.env.local
+.env.*.local
+
+Thumbs.db

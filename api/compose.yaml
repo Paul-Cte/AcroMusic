@@ -1,16 +1,14 @@
-
 services:
-
   app:
-    build: .                # Utilise le Dockerfile qu'on vient de créer
+    build: . # Utilise le Dockerfile qu'on vient de créer
     ports:
-      - "80:80"             # Ton site sera accessible sur localhost:80
+      - "80:80" # Ton site sera accessible sur localhost:80
     volumes:
-      - ./:/var/www/html    # Synchronise fichiers locaux avec le conteneur
+      - ./:/var/www/html # Synchronise fichiers locaux avec le conteneur
       - /var/www/html/var
     depends_on:
       - database
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
     environment:
@@ -19,7 +17,15 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
       POSTGRES_USER: ${POSTGRES_USER:-app}
     healthcheck:
-      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-d",
+          "${POSTGRES_DB:-app}",
+          "-U",
+          "${POSTGRES_USER:-app}",
+        ]
       timeout: 5s
       retries: 5
       start_period: 60s
@@ -27,9 +33,11 @@ services:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
+  ###< doctrine/doctrine-bundle ###
 
 volumes:
-###> doctrine/doctrine-bundle ###
+  ###> doctrine/doctrine-bundle ###
   database_data:
-###< doctrine/doctrine-bundle ###
+  ###< doctrine/doctrine-bundle ###
+  redis_data:
+###< Redis ###
