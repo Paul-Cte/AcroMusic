@@ -1,6 +1,7 @@
 import HeroAlbums from "../hero/heroalbums.jsx";
 import HomeCard from "../discographie/homeCard.jsx";
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
 
 
 export default function Accueil({albums}){
@@ -16,7 +17,9 @@ export default function Accueil({albums}){
     const albumMostRecent = troisDerniersAlbums[0];
 
 
-
+    useEffect(() => {
+        document.title = "AcroMusic | Accueil";
+    }, []);
 
 
     return (

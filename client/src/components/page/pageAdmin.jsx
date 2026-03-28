@@ -39,6 +39,9 @@ function AxiosInterceptor() {
 
 
 export default function PageAdmin() {
+    useEffect(() => {
+        document.title = "AcroMusic | Administration";
+    }, []);
 
     const navigate = useNavigate();
     const queryClient = useQueryClient();

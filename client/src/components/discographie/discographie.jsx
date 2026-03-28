@@ -1,6 +1,10 @@
 import Card from "./card.jsx";
+import {useEffect} from "react";
 
 export default function Discographie({ albums, isPending }) {
+    useEffect(() => {
+        document.title = "AcroMusic | Discographie";
+    }, []);
 
     if (isPending || !albums) {
         return (

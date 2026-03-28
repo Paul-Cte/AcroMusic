@@ -5,6 +5,9 @@ import {useMutation} from "@tanstack/react-query";
 import {useNavigate} from "react-router-dom";
 
 export default function PageConnexion() {
+    useEffect(() => {
+        document.title = "AcroMusic | Connexion";
+    }, []);
     const navigate = useNavigate();
 
     const [infosConnexion, setInfosConnexion] = useState({

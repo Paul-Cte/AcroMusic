@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function Contact() {
+    useEffect(() => {
+        document.title = "AcroMusic | Contact";
+    }, []);
     return (
         <div className="pt-25 md:pt-[25vh] pb-20 flex flex-col items-center w-full min-h-[80vh] font-barlow">
             <h1 className="pb-15 md:pb-[10vh] text-4xl sm:text-7xl md:text-8xl lg:text-[100px] font-black text-black uppercase tracking-tighter text-center px-4">

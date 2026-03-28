@@ -1,4 +1,7 @@
 export default function MentionsLegales() {
+    useEffect(() => {
+        document.title = "AcroMusic | Mentions légales";
+    }, []);
     return (
         <div className="pt-25 md:pt-[25vh] pb-20 flex flex-col items-center min-h-screen">
             <div className="w-[90%] max-w-4xl bg-white p-8 md:p-12 rounded-lg">
