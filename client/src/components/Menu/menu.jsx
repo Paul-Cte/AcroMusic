@@ -34,13 +34,13 @@ export default function Menu(){
                     <span className={`block h-[3px] w-[25px] bg-black rounded transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-[11px] w-[40px] bg-white" : ""}`}/>
                 </button>
 
-                <img src="/public/acromusic_logo.png" className="w-35" onClick={goToAccueil}/>
+                <img src="acromusic_logo.png" className="w-35" onClick={goToAccueil}/>
             </div>
 
             {/*le menu sur pc*/}
             <div
                 className="uppercase font-barlow font-semibold w-full hidden absolute top-0 left-0 md:flex h-[15vh] flex flex-row items-center justify-around text-[20px]">
-                <img src="/public/acromusic_logo.png" alt="logo AcroMusic" className="w-[240px]"></img>
+                <img src="acromusic_logo.png" alt="logo AcroMusic" className="w-[240px]"></img>
                 <div className="flex flex-row items-center gap-[50px]">
                     <MenuContent/>
                 </div>
@@ -74,7 +74,7 @@ export default function Menu(){
                 <Link onClick={closeMenuClient} to="/accueil">Accueil</Link>
                 <Link onClick={closeMenuClient} to="/discographie">Discographie</Link>
                 <Link onClick={closeMenuClient} to="/contact">Contact</Link>
-                <img src="/public/acromusic_logo_white.webp" className=" absolute bottom-0 left-1/2 -translate-x-1/2 w-45" onClick={goToAccueil}/>
+                <img src="acromusic_logo_white.webp" className=" absolute bottom-0 left-1/2 -translate-x-1/2 w-45" onClick={goToAccueil}/>
             </div>
         </>
     )
