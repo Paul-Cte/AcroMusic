@@ -1,4 +1,4 @@
-# AcroMusic 🎹
+# AcroMusic 
 
 ## À propos du projet
 AcroMusic est une application web full-stack conçue pour servir de portfolio et de vitrine à un artiste musical. 
@@ -7,7 +7,7 @@ Le projet se divise en deux parties :
 - **Une interface publique** : Permet aux visiteurs de découvrir l'artiste, d'explorer sa discographie détaillée et de le contacter.
 - **Un espace d'administration** : Un espace sécurisé réservé à l'administrateur pour ajouter, modifier ou supprimer dynamiquement les albums et les compositeurs depuis le site, sans toucher au code.
 
-## Stack Technique 🛠️
+## Stack Technique 
 
 Ce projet est construit avec une architecture découplée (Frontend / Backend API) :
 
