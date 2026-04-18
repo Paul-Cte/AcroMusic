@@ -15,8 +15,8 @@ export default function Contact() {
                 <div className="flex flex-col items-center text-center gap-3 flex-1">
                     <i className="fi fi-rr-envelope text-4xl text-black"></i>
                     <h2 className="text-2xl font-bold uppercase tracking-tight text-black">M'écrire</h2>
-                    <a href="mailto:contact@acromusic.fr" className="text-lg sm:text-xl text-gray-600 hover:text-black hover:underline transition-colors">
-                        contact@acromusic.fr
+                    <a href="mailto:acro.musique.live.pro@gmail.com" className="text-lg sm:text-xl text-gray-600 hover:text-black hover:underline transition-colors">
+                        acro.musique.live.pro@gmail.com
                     </a>
                 </div>
 
