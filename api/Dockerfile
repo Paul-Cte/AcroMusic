@@ -30,6 +30,7 @@ COPY . /var/www/html/
 
 # Installer les dépendances avec Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV APP_ENV=prod
 RUN composer install --no-dev --optimize-autoloader
 
 # Donner les droits au serveur web pour lire et écrire les fichiers
