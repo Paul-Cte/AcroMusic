@@ -35,3 +35,6 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Donner les droits au serveur web pour lire et écrire les fichiers
 RUN chown -R www-data:www-data /var/www/html
+
+RUN chmod +x /var/www/html/entrypoint.sh
+CMD ["/var/www/html/entrypoint.sh"]
