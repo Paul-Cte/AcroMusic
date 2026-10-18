@@ -25,3 +25,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # On se place dans le dossier de travail
 WORKDIR /var/www/html
+# Copier tout le code de l'API dans le conteneur
+COPY . /var/www/html/
+
+# Installer les dépendances avec Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-dev --optimize-autoloader
+
+# Donner les droits au serveur web pour lire et écrire les fichiers
+RUN chown -R www-data:www-data /var/www/html
